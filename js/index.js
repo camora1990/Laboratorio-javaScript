@@ -1,10 +1,11 @@
-import { game } from "./game.js";
+
+import { initGame } from "./initGame.js";
 let userGame = {
   name: "",
   logged: false,
   category: {
     level: 1,
-    categoryName: "Bases de datos",
+    categoryName: "Fundamentos de programación",
     points: 0,
   },
 };
@@ -15,4 +16,4 @@ if (localStorage.getItem("userGame")) {
   localStorage.setItem("userGame", JSON.stringify(userGame));
 }
 
-game(userGame);
+initGame(userGame);
