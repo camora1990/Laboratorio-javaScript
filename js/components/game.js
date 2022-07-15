@@ -268,14 +268,14 @@ export class Game {
       width: 600,
       padding: "3em",
       color: "#3f4144",
-      background: "#fff url(../../assets/images/confetti.gif)",
+      background: "#fff url(/confetti.gif)",
       showCancelButton: true,
       confirmButtonText: "Jugar de nuevo",
       cancelButtonText: "Salir de juego",
       reverseButtons: true,
       backdrop: `
         rgba(0,0,0,0.4)
-        url("../../assets/images/ganadores.gif")
+        url("/ganadores.gif")
         left top
         no-repeat
       `,
@@ -308,7 +308,7 @@ export class Game {
       text: "Sigue practicando",
       icon: "error",
       iconColor: "transparent",
-      background: "#fff url(../../assets/images/76ck.gif)",
+      background: "#fff url(/images/76ck.gif)",
       color: "#000000",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -325,6 +325,7 @@ export class Game {
             points: 0,
           },
         };
+        localStorage.setItem("userGame", JSON.stringify(this.#player));
         location.reload();
       } else {
         document.getElementById("btn-logout").click();
