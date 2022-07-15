@@ -317,6 +317,7 @@ export class Game {
       cancelButtonText: "Salir del juego",
     }).then((result) => {
       if (result.isConfirmed || result.isDenied) {
+        debugger
         this.#player = {
           ...this.#player,
           category: {
