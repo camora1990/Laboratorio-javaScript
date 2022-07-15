@@ -21,7 +21,8 @@
 ## Características de Arquitectura
 
 - Manejo de componentes
-- Modularizacion del codigo
+- Modularizacion del código
+
 
 ## Instrucciones del juego
 
@@ -31,6 +32,6 @@
 4. Se gana si se responden las 5 categorías.
 
 
-# Inicia juegando en el siguiente link
+# Inicia jugando  en el siguiente link
 
-Inicia una partda dando clic  [Aquí](https://camora1990.github.io/laboratorio-javaScript/ "aquí")
+Inicia una partida dando clic  [Aquí](https://camora1990.github.io/laboratorio-javaScript/ "aquí")
