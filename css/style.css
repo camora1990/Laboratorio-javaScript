@@ -31,13 +31,6 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 
 }
 
-.btn-custom:active #btn-send{
-  display: flex;
-}
-
-#btn-send{
-  display: none;
-}
 .btn-custom:active {
   background-color: #6c757d;
 }

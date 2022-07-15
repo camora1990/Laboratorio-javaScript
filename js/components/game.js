@@ -19,7 +19,6 @@ export class Game {
   /** Propiedad que contiene los datos del jugador */
   #player;
 
-
   /**
    * @constructor
    * @author Camilo Morales Sanchez
@@ -28,6 +27,7 @@ export class Game {
     this.#utilities = utilities;
     this.#parentNode = document.getElementById("container");
     this.#player = JSON.parse(localStorage.getItem("userGame"));
+    this.#optionSelected = null;
   }
 
   /**
@@ -52,14 +52,14 @@ export class Game {
 
     const h1LevelTitle = this.#utilities.createComponent(
       "h1",
-      ["text-center", "mt-2", "mb-3","text-light"],
+      ["text-center", "mt-2", "mb-3", "text-light"],
       null,
       null,
       `Nivel: ${category.level}`
     );
     const h3InformationLevel = this.#utilities.createComponent(
       "h3",
-      ["text-center", "mt-5","text-light"],
+      ["text-center", "mt-5", "text-light"],
       null,
       null,
       `Categoria: ${category.categoryName} por ${String(
@@ -107,6 +107,7 @@ export class Game {
         option.item
       );
       componentButton.setAttribute("data-question-id", index);
+
       componentButton.addEventListener("click", this.#eventOptionSelected());
       return componentButton;
     });
@@ -139,10 +140,10 @@ export class Game {
   }
 
   /**
-   * 
+   *
    * Este metodo obtiene una pregunta aleatoria correspondiente al nivel enviado
    * @param {number} level -Nivel para obtener la pregunta aleatoria perteneciente a ese nivel
-   * @returns -retorna pregunta 
+   * @returns -retorna pregunta
    * @author Camilo Morales Sanchez
    */
 
@@ -158,7 +159,7 @@ export class Game {
   }
 
   /**
-   * Este metodo asigna la opcion seleccionada por el jugador 
+   * Este metodo asigna la opcion seleccionada por el jugador
    * @method metodo evento click de boton opciones
    * @returns - retorna el evento
    * @author Camilo Morales Sanchez
@@ -177,22 +178,23 @@ export class Game {
    */
   #eventSendResposeSelected() {
     return (event) => {
-      Swal.fire({
-        title: "¿Estás seguro de enviar la opción seleccionada? ",
-        text: "¡No podrás revertir esto!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, estoy seguro",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.#validateResponse();
-        }
-      });
+      this.#optionSelected
+        ? Swal.fire({
+            title: "¿Estás seguro de enviar la opción seleccionada? ",
+            text: "¡No podrás revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, estoy seguro",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.#validateResponse();
+            }
+          })
+        : Swal.fire("Debes seleccionar una opción");
     };
   }
-
 
   /**
    * Metodo encargado de validar la respuesta enviada por el usuario
@@ -210,22 +212,19 @@ export class Game {
         timer: 1500,
       });
       this.#nextLevel();
- 
     } else {
       this.#messageWrongAnswer();
- 
     }
   }
 
   /**
-   * 
+   *
    * Encargado de realizar el cambio de nivel en el juego
    * @method
    * @author Camilo Morales Sanchez
    */
 
   #nextLevel() {
-   
     this.#player = JSON.parse(localStorage.getItem("userGame"));
     const { category } = this.#question;
     const { level, points } = category;
@@ -245,6 +244,7 @@ export class Game {
         })
       );
       this.#player = JSON.parse(localStorage.getItem("userGame"));
+      this.#optionSelected = null;
       document.getElementById("player-points").innerHTML = `Total puntos: ${
         this.#player.category.points
       } Nivel: ${parseInt(level) + 1}`;
@@ -297,7 +297,7 @@ export class Game {
     });
   }
 
-    /**
+  /**
    * Muestra modal al respuesta incorrecta con opciones de de reiniciar el juego o salirse
    * @method
    * @author Camilo Morales Sanchez
@@ -316,7 +316,6 @@ export class Game {
       confirmButtonText: "Intentarlo de nuevo",
       cancelButtonText: "Salir del juego",
     }).then((result) => {
-    
       if (result.isConfirmed || result.isDenied) {
         this.#player = {
           ...this.#player,
