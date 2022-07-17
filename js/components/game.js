@@ -268,7 +268,7 @@ export class Game {
       width: 600,
       padding: "3em",
       color: "#3f4144",
-      background: "#fff url(../../assets/img/confetti.gif)",
+      background: "#fff url(../assets/img/confetti.gif)",
       showCancelButton: true,
       confirmButtonText: "Jugar de nuevo",
       cancelButtonText: "Salir de juego",
