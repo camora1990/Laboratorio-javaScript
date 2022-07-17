@@ -9,15 +9,24 @@ export function initGame(userGame) {
   navar.createNavBar();
   loginForm.createLoginForm();
   startModaGame.createModal();
-  
+
   if (!userGame.logged) {
     loginForm.formloginNode.classList.add("d-flex");
   } else {
     if (userGame.category.level > 1) {
       navar.navBar.style.display = "";
-      game.createQuestionModal(userGame.category.level)
+      game.createQuestionModal(userGame.category.level);
     } else {
       startModaGame.starterGameModal.style.display = "";
     }
   }
 }
+
+[
+  {
+    "name": "prueba",
+    "points": 1000,
+    "email": "correo@correo.com",
+    "level": 1
+  }
+];
